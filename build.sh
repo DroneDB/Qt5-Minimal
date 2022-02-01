@@ -72,7 +72,7 @@ make -j$(nproc) && make install
 cd $__dirname
 
 # Strip some stuff
-rm -fr qt-install/{description-pak,doc,doc-pak,mkspecs}
+rm -fr qt-install/{description-pak,doc,doc-pak}
 
 mkdir -p qt-install/DEBIAN
 
@@ -89,8 +89,7 @@ mv -v qt-install.deb qt5-$QT_VERSION-minimal-${PKG_SUFFIX}amd64-dev.deb
 # Strip some more stuff
 rm -fr $__dirname/qt-install/lib/*.{a,prl,la}
 rm -fr $__dirname/qt-install/lib/{cmake,pkgconfig}
-rm -fr $__dirname/qt-install/bin
-rm -fr $__dirname/qt-install/plugins
+rm -fr $__dirname/qt-install/{bin,plugins,mkspecs}
 
 # Build binary
 echo "Package: qt5-minimal-bin
