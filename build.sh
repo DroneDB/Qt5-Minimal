@@ -14,7 +14,7 @@ if [[ "$ISSUE" == *"Ubuntu"* ]]; then
   PKG_SUFFIX="ubuntu-$UBUNTU_VERSION-"
 fi
 
-apt update
+apt update || sudo apt update
 
 check_command(){
 	check_msg_prefix="Checking for $1... "
