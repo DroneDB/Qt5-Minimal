@@ -20,7 +20,7 @@ jobs:
               with:
                 submodules: 'recursive'
             - name: Build
-              run: build.sh
+              run: ./build.sh
             - name: Upload Distribution Files
               uses: actions/upload-artifact@v2
               with:
