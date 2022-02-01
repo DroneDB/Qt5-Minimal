@@ -54,21 +54,21 @@ if [ ! -e qt-everywhere-opensource-src-$QT_VERSION ]; then
     tar -xf qt-everywhere-opensource-src-$QT_VERSION.tar.xz
 fi
 
-# if [ -e qt-build ]; then
-#     echo "Removing previous build"
-#     rm -fr qt-build
-# fi
+if [ -e qt-build ]; then
+    echo "Removing previous build"
+    rm -fr qt-build
+fi
 
-# if [ -e qt-install ]; then
-#     echo "Removing previous install"
-#     rm -fr qt-install
-# fi
+if [ -e qt-install ]; then
+    echo "Removing previous install"
+    rm -fr qt-install
+fi
 
-# mkdir -p qt-build
-# cd qt-build
+mkdir -p qt-build
+cd qt-build
 
-# ../qt-everywhere-opensource-src-$QT_VERSION/configure -static -skip connectivity -skip sensors -skip datavis3d -skip serialbus -skip declarative -skip serialport -skip doc -skip speech -skip gamepad -skip svg -skip graphicaleffects -skip tools -skip imageformats -skip translations -skip location -skip virtualkeyboard -skip macextras -skip wayland -skip multimedia -skip webchannel -skip networkauth -skip webengine -skip websockets -skip 3d -skip purchasing -skip webview -skip activeqt -skip quickcontrols -skip winextras -skip androidextras -skip quickcontrols2 -skip x11extras -skip remoteobjects -skip xmlpatterns -skip canvas3d -skip script -skip charts -skip scxml -opensource -nomake tools -nomake tests -nomake examples -confirm-license -qt-libpng -no-harfbuzz -qt-pcre -qt-freetype -nomake tests -no-feature-testlib -no-feature-widgets -no-feature-xml -no-feature-sql -no-feature-network -no-feature-dbus -no-feature-linuxfb -no-feature-accessibility -no-feature-evdev -no-feature-vnc -no-feature-xlib -no-feature-xcb -no-feature-iconv -qt-zlib -platform linux-g++ -no-feature-eglfs -no-feature-opengl --prefix=$__dirname/qt-install
-# make -j$(nproc) && make install
+../qt-everywhere-opensource-src-$QT_VERSION/configure -static -skip connectivity -skip sensors -skip datavis3d -skip serialbus -skip declarative -skip serialport -skip doc -skip speech -skip gamepad -skip svg -skip graphicaleffects -skip tools -skip imageformats -skip translations -skip location -skip virtualkeyboard -skip macextras -skip wayland -skip multimedia -skip webchannel -skip networkauth -skip webengine -skip websockets -skip 3d -skip purchasing -skip webview -skip activeqt -skip quickcontrols -skip winextras -skip androidextras -skip quickcontrols2 -skip x11extras -skip remoteobjects -skip xmlpatterns -skip canvas3d -skip script -skip charts -skip scxml -opensource -nomake tools -nomake tests -nomake examples -confirm-license -qt-libpng -no-harfbuzz -qt-pcre -qt-freetype -nomake tests -no-feature-testlib -no-feature-widgets -no-feature-xml -no-feature-sql -no-feature-network -no-feature-dbus -no-feature-linuxfb -no-feature-accessibility -no-feature-evdev -no-feature-vnc -no-feature-xlib -no-feature-xcb -no-feature-iconv -qt-zlib -platform linux-g++ -no-feature-eglfs -no-feature-opengl --prefix=$__dirname/qt-install
+make -j$(nproc) && make install
 cd $__dirname
 
 # Strip some stuff
