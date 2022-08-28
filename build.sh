@@ -46,10 +46,10 @@ check_command "g++" "apt install build-essential" "apt install build-essential -
 check_command "xz" "apt install xz-utils" "apt install xz-utils -y"
 
 if [[ "$UBUNTU_VERSION" = "22.04" ]]; then
-  apt remove g++ gcc -y
-  apt install g++-9 gcc-9 -y
-  ln -s /usr/bin/g++-9 /usr/bin/g++
-  ln -s /usr/bin/gcc-9 /usr/bin/gcc
+  sudo apt remove g++ gcc -y
+  sudo apt install g++-9 gcc-9 -y
+  sudo ln -s /usr/bin/g++-9 /usr/bin/g++
+  sudo ln -s /usr/bin/gcc-9 /usr/bin/gcc
 fi
 
 if [ ! -e qt-everywhere-opensource-src-$QT_VERSION.tar.xz ]; then
