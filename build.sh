@@ -42,7 +42,11 @@ check_command(){
 }
 
 check_command "curl" "apt install curl" "apt install curl -y"
-check_command "g++" "apt install build-essential" "apt install build-essential -y"
+if [[ "$UBUNTU_VERSION" = "22.04" ]]; then
+  check_command "g++-9" "apt install g++-9" "apt install g++-9 -y"
+else
+  check_command "g++" "apt install build-essential" "apt install build-essential -y"
+fi
 check_command "xz" "apt install xz-utils" "apt install xz-utils -y"
 
 if [ ! -e qt-everywhere-opensource-src-$QT_VERSION.tar.xz ]; then
