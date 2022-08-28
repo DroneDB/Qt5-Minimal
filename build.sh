@@ -42,12 +42,15 @@ check_command(){
 }
 
 check_command "curl" "apt install curl" "apt install curl -y"
-if [[ "$UBUNTU_VERSION" = "22.04" ]]; then
-  check_command "g++-9" "apt install g++-9" "apt install g++-9 -y"
-else
-  check_command "g++" "apt install build-essential" "apt install build-essential -y"
-fi
+check_command "g++" "apt install build-essential" "apt install build-essential -y"
 check_command "xz" "apt install xz-utils" "apt install xz-utils -y"
+
+if [[ "$UBUNTU_VERSION" = "22.04" ]]; then
+  apt remove g++ gcc -y
+  apt install g++-9 gcc-9 -y
+  ln -s /usr/bin/g++-9 /usr/bin/g++
+  ln -s /usr/bin/gcc-9 /usr/bin/gcc
+fi
 
 if [ ! -e qt-everywhere-opensource-src-$QT_VERSION.tar.xz ]; then
     echo Downloading QT5...
