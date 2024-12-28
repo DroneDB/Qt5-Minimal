@@ -14,15 +14,15 @@ jobs:
         runs-on: ${{ matrix.os }}
         strategy:
           matrix:
-            os: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04]
+            os: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
               with:
                 submodules: 'recursive'
             - name: Build
               run: ./build.sh
             - name: Upload Distribution Files
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v4
               with:
                 name: Packages
                 path: "*.deb"
