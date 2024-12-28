@@ -3,8 +3,8 @@ __dirname=$(cd $(dirname "$0"); pwd -P)
 cd ${__dirname}
 set -e -o pipefail
 
-QT_MAJOR=5.9
-QT_VERSION=5.9.5
+QT_MAJOR=5.15
+QT_VERSION=5.15.16
 
 ISSUE=$(cat /etc/issue | xargs echo -n)
 PKG_SUFFIX=""
@@ -20,16 +20,16 @@ check_command(){
 	check_msg_prefix="Checking for $1... "
 	check_msg_result="\033[92m\033[1m OK\033[0m\033[39m"
 
-	hash $1 2>/dev/null || not_found=true 
+	hash $1 2>/dev/null || not_found=true
 	if [[ $not_found ]]; then
-		
+
 		# Can we attempt to install it?
 		if [[ ! -z "$3" ]]; then
 			echo -e "$check_msg_prefix \033[93mnot found, we'll attempt to install\033[39m"
 			eval "$3 || sudo $3"
 
 			# Recurse, but don't pass the install command
-			check_command "$1" "$2"	
+			check_command "$1" "$2"
 		else
 			check_msg_result="\033[91m can't find $1! Check that the program is installed and that you have added the proper path to the program to your PATH environment variable. If you change your PATH environment variable, remember to close and reopen your terminal. $2\033[39m"
 		fi
@@ -74,7 +74,7 @@ fi
 mkdir -p qt-build
 cd qt-build
 
-../qt-everywhere-opensource-src-$QT_VERSION/configure -static -skip connectivity -skip sensors -skip datavis3d -skip serialbus -skip declarative -skip serialport -skip doc -skip speech -skip gamepad -skip svg -skip graphicaleffects -skip tools -skip imageformats -skip translations -skip location -skip virtualkeyboard -skip macextras -skip wayland -skip multimedia -skip webchannel -skip networkauth -skip webengine -skip websockets -skip 3d -skip purchasing -skip webview -skip activeqt -skip quickcontrols -skip winextras -skip androidextras -skip quickcontrols2 -skip x11extras -skip remoteobjects -skip xmlpatterns -skip canvas3d -skip script -skip charts -skip scxml -opensource -nomake tools -nomake tests -nomake examples -confirm-license -qt-libpng -no-harfbuzz -qt-pcre -qt-freetype -nomake tests -no-feature-testlib -no-feature-widgets -no-feature-xml -no-feature-sql -no-feature-network -no-feature-dbus -no-feature-linuxfb -no-feature-accessibility -no-feature-evdev -no-feature-vnc -no-feature-xlib -no-feature-xcb -no-feature-iconv -qt-zlib -platform linux-g++ -no-feature-eglfs -no-feature-opengl -no-feature-icu -no-feature-glib --prefix=$__dirname/qt-install
+../qt-everywhere-src-$QT_VERSION/configure -static -skip connectivity -skip sensors -skip datavis3d -skip serialbus -skip declarative -skip serialport -skip doc -skip speech -skip gamepad -skip svg -skip graphicaleffects -skip tools -skip imageformats -skip translations -skip location -skip virtualkeyboard -skip macextras -skip wayland -skip multimedia -skip webchannel -skip networkauth -skip webengine -skip websockets -skip 3d -skip purchasing -skip webview -skip activeqt -skip quickcontrols -skip winextras -skip androidextras -skip quickcontrols2 -skip x11extras -skip remoteobjects -skip xmlpatterns -skip canvas3d -skip script -skip charts -skip scxml -opensource -nomake tools -nomake tests -nomake examples -confirm-license -qt-libpng -no-harfbuzz -qt-pcre -qt-freetype -nomake tests -no-feature-testlib -no-feature-widgets -no-feature-xml -no-feature-sql -no-feature-network -no-feature-dbus -no-feature-linuxfb -no-feature-accessibility -no-feature-evdev -no-feature-vnc -no-feature-xlib -no-feature-xcb -no-feature-iconv -qt-zlib -platform linux-g++ -no-feature-eglfs -no-feature-opengl -no-feature-icu -no-feature-glib --prefix=$__dirname/qt-install
 make -j$(nproc) && make install
 cd $__dirname
 
@@ -87,7 +87,7 @@ mkdir -p qt-install/DEBIAN
 echo "Package: qt5-minimal-dev
 Version: $QT_VERSION
 Architecture: amd64
-Maintainer: Piero Toffanin <pt@masseranolabs.com>
+Maintainer: Luca Di Leo <support@dronedb.app>
 Description: Minimal QT5 installation development files" > qt-install/DEBIAN/control
 
 dpkg-deb --build qt-install
@@ -102,7 +102,7 @@ rm -fr $__dirname/qt-install/{bin,plugins,mkspecs}
 echo "Package: qt5-minimal-bin
 Version: $QT_VERSION
 Architecture: amd64
-Maintainer: Piero Toffanin <pt@masseranolabs.com>
+Maintainer: Luca Di Leo <support@dronedb.app>
 Description: Minimal QT5 installation binary files" > qt-install/DEBIAN/control
 
 dpkg-deb --build qt-install
