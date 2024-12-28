@@ -45,12 +45,12 @@ check_command "curl" "apt install curl" "apt install curl -y"
 check_command "g++" "apt install build-essential" "apt install build-essential -y"
 check_command "xz" "apt install xz-utils" "apt install xz-utils -y"
 
-if [[ "$UBUNTU_VERSION" = "22.04" ]]; then
-  sudo apt remove g++ gcc -y
-  sudo apt install g++-9 gcc-9 -y
-  sudo ln -s /usr/bin/g++-9 /usr/bin/g++
-  sudo ln -s /usr/bin/gcc-9 /usr/bin/gcc
-fi
+# if [[ "$UBUNTU_VERSION" = "22.04" ]]; then
+#   sudo apt remove g++ gcc -y
+#   sudo apt install g++-9 gcc-9 -y
+#   sudo ln -s /usr/bin/g++-9 /usr/bin/g++
+#   sudo ln -s /usr/bin/gcc-9 /usr/bin/gcc
+# fi
 
 if [ ! -e qt-everywhere-opensource-src-$QT_VERSION.tar.xz ]; then
     echo Downloading QT5...
